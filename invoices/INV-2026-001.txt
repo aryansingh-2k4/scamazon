@@ -1,0 +1,5 @@
+SCAMAZON ORDER RECEIPT
+Order #SCAM-9812-4412
+Item: Scamazon Echo Dot (5th Gen)
+Total: $49.99
+Status: Delivered
