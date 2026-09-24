@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scamazon.com: Spend less. Smile more.</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar (Amazon Style) -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="/" class="nav-logo">
+        <span class="logo-text">scamazon<span class="logo-dot">.com</span></span>
+        <div class="logo-smile"></div>
+      </a>
+      <div class="nav-deliver">
+        <i class="fa-solid fa-location-dot deliver-icon"></i>
+        <div class="deliver-text">
+          <span class="deliver-line-1">Deliver to Aryansh</span>
+          <span class="deliver-line-2">Bengaluru 560001</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Search Bar -->
+    <div class="nav-search">
+      <select class="search-category" id="searchCategory">
+        <option value="all">All Departments</option>
+        <option value="electronics">Electronics</option>
+        <option value="devices">Scamazon Devices</option>
+        <option value="gaming">PC Gaming</option>
+        <option value="audio">Headphones</option>
+      </select>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search Scamazon (Try SQLi payload: ' OR '1'='1)">
+      <button class="search-btn" id="searchBtn" title="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+
+    <!-- Right Account & Cart -->
+    <div class="nav-right">
+      <div class="nav-item">
+        <span class="line-1">Hello, Aryansh</span>
+        <span class="line-2">Account & Lists <i class="fa-solid fa-caret-down"></i></span>
+      </div>
+      <div class="nav-item">
+        <span class="line-1">Returns</span>
+        <span class="line-2">& Orders</span>
+      </div>
+      <div class="nav-cart" id="cartButton">
+        <div class="cart-icon-wrapper">
+          <span class="cart-count" id="cartCount">2</span>
+          <i class="fa-solid fa-cart-shopping cart-icon"></i>
+        </div>
+        <span class="cart-text">Cart</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-header Menu Bar -->
+  <nav class="sub-nav">
+    <div class="sub-nav-item all-menu">
+      <i class="fa-solid fa-bars"></i> All
+    </div>
+    <a href="#" class="sub-nav-item">Today's Deals</a>
+    <a href="#" class="sub-nav-item">Customer Service</a>
+    <a href="#" class="sub-nav-item">Registry</a>
+    <a href="#" class="sub-nav-item">Gift Cards</a>
+    <a href="#" class="sub-nav-item">Sell</a>
+    <div class="sub-nav-right">
+      <span>Scamazon Security Audit Sandbox Mode (Port 8080)</span>
+    </div>
+  </nav>
+
+  <!-- Main Storefront Hero Banner -->
+  <main class="main-container">
+    <div class="hero-banner">
+      <div class="hero-content">
+        <h1>Big Spring Clearance Deals</h1>
+        <p>Save up to 60% across Scamazon Devices, Smart Home, and Gaming Essentials.</p>
+        <button class="hero-btn" onclick="scrollToProducts()">Shop all deals</button>
+      </div>
+    </div>
+
+    <!-- Active Search Info Bar -->
+    <div id="searchInfoBar" class="search-info-bar" style="display: none;">
+      <span>Showing results for "<strong id="searchQueryLabel"></strong>"</span>
+      <span class="sql-badge" id="sqlExecutedBadge"></span>
+      <button class="clear-search-btn" onclick="clearSearch()">Clear Filter</button>
+    </div>
+
+    <!-- Product Grid -->
+    <section class="products-section" id="productsSection">
+      <h2 class="section-title">Featured Recommended Deals</h2>
+      <div class="product-grid" id="productGrid">
+        <!-- Injected via app.js -->
+      </div>
+    </section>
+
+    <!-- Interactive Security Diagnostic Sandbox Drawer -->
+    <section class="security-tools-card">
+      <div class="security-card-header">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>Fulfillment Center Diagnostic & Security Tools (For Sentinel DAST & SAST Demos)</h3>
+      </div>
+      <div class="tools-grid">
+        <!-- Tool 1: Courier Ping -->
+        <div class="tool-box">
+          <h4><i class="fa-solid fa-truck-fast"></i> Fulfillment Hub Courier Ping</h4>
+          <p class="tool-desc">Test network ping to regional logistics warehouse (Vulnerable to Command Injection - CWE-78).</p>
+          <div class="tool-input-row">
+            <input type="text" id="pingHostInput" value="127.0.0.1" placeholder="IP / Host (e.g. 127.0.0.1; whoami)">
+            <button onclick="testCourierPing()">Ping Hub</button>
+          </div>
+          <pre id="pingResult" class="tool-output">Awaiting ping request...</pre>
+        </div>
+
+        <!-- Tool 2: Review Preview XSS -->
+        <div class="tool-box">
+          <h4><i class="fa-solid fa-star"></i> Customer Review Live Preview</h4>
+          <p class="tool-desc">Preview HTML review formatting before submission (Vulnerable to Reflected XSS - CWE-79).</p>
+          <div class="tool-input-row">
+            <input type="text" id="xssAuthorInput" value="Alice" placeholder="Author name">
+            <input type="text" id="xssCommentInput" value="<img src=x onerror=alert(1)>" placeholder="Comment HTML">
+            <button onclick="previewReviewXSS()">Test Preview</button>
+          </div>
+          <div id="xssResult" class="tool-preview-box">Review preview will render here...</div>
+        </div>
+
+        <!-- Tool 3: Invoice Downloader -->
+        <div class="tool-box">
+          <h4><i class="fa-solid fa-file-invoice-dollar"></i> Order Invoice Viewer</h4>
+          <p class="tool-desc">Retrieve order receipts by filename (Vulnerable to Path Traversal - CWE-22).</p>
+          <div class="tool-input-row">
+            <input type="text" id="invoiceFileInput" value="INV-2026-001.txt" placeholder="Filename (e.g. ../package.json)">
+            <button onclick="downloadInvoice()">Fetch Invoice</button>
+          </div>
+          <pre id="invoiceResult" class="tool-output">Awaiting file request...</pre>
+        </div>
+
+        <!-- Tool 4: Supplier Webhook SSRF -->
+        <div class="tool-box">
+          <h4><i class="fa-solid fa-network-wired"></i> Supplier Webhook Tester</h4>
+          <p class="tool-desc">Test HTTP connectivity with third-party merchant webhooks (Vulnerable to SSRF - CWE-918).</p>
+          <div class="tool-input-row">
+            <input type="text" id="ssrfUrlInput" value="http://localhost:8080/health" placeholder="Destination URL">
+            <button onclick="testSupplierWebhook()">Test Webhook</button>
+          </div>
+          <pre id="ssrfResult" class="tool-output">Awaiting webhook probe...</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to top</div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Get to Know Us</h4>
+        <a href="#">Careers</a>
+        <a href="#">Scamazon Blog</a>
+        <a href="#">About Scamazon</a>
+        <a href="#">Investor Relations</a>
+      </div>
+      <div class="footer-col">
+        <h4>Make Money with Us</h4>
+        <a href="#">Sell products on Scamazon</a>
+        <a href="#">Become an Affiliate</a>
+        <a href="#">Fulfillment by Scamazon</a>
+      </div>
+      <div class="footer-col">
+        <h4>Scamazon Payment Products</h4>
+        <a href="#">Scamazon Business Card</a>
+        <a href="#">Shop with Points</a>
+        <a href="#">Reload Your Balance</a>
+      </div>
+      <div class="footer-col">
+        <h4>Let Us Help You</h4>
+        <a href="#">Your Account</a>
+        <a href="#">Your Orders</a>
+        <a href="#">Shipping Rates & Policies</a>
+        <a href="#">Returns & Replacements</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-logo">scamazon</div>
+      <p>&copy; 2026 Scamazon.com, Inc. Built as an autonomous security pentest testbed for Sentinel AI.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
