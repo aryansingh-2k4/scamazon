@@ -3,15 +3,15 @@
  * WARNING: Sensitive production API keys and storage credentials
  */
 
-// Intentional Hardcoded Secrets for SAST & TruffleHog Detection (CWE-798)
-const STRIPE_SECRET_KEY = "sk_test_51MzScamAz0n992834823904820938402";
-const STRIPE_PUBLIC_KEY = "pk_test_51MzScamAz0n992834823904820938402";
+// Payment Gateway Credentials
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+const STRIPE_PUBLIC_KEY = process.env.STRIPE_PUBLIC_KEY || "";
 
-const AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE";
-const AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || "";
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || "";
 
-const S3_BUCKET_NAME = "scamazon-customer-invoices-us-east-1";
-const JWT_AUTH_SECRET = "scamazon_super_secret_jwt_auth_key_2026";
+const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
+const JWT_AUTH_SECRET = process.env.JWT_AUTH_SECRET || "";
 
 module.exports = {
   STRIPE_SECRET_KEY,
